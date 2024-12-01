@@ -1,0 +1,11 @@
+Model Information:
+* title:	Book and Pencil Set
+* source:	https://sketchfab.com/3d-models/book-and-pencil-set-e09e3d31f6f84b108d1bd34856663abc
+* author:	rikugo.studio (https://sketchfab.com/rikugo.studio)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Book and Pencil Set" (https://sketchfab.com/3d-models/book-and-pencil-set-e09e3d31f6f84b108d1bd34856663abc) by rikugo.studio (https://sketchfab.com/rikugo.studio) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
