@@ -58,7 +58,7 @@ function loadModel() {
     
     try {
         gltfLoader.load(
-            './book_and_pencil_set/scene.gltf',
+            './public/book_and_pencil_set/scene.gltf',
             (gltf) => {
                 const model = gltf.scene;
                 
