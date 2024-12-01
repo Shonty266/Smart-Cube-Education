@@ -1536,45 +1536,7 @@
         });
     </script>
 
-    <!-- Mobile Menu Toggle -->
-    <script>
-        const mobileMenuButton = document.querySelector('[aria-controls="mobile-menu"]');
-        const mobileMenu = document.getElementById('mobile-menu');
-
-        if (mobileMenuButton && mobileMenu) {
-            mobileMenuButton.addEventListener('click', () => {
-                const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
-                mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
-                
-                // Animate menu
-                if (!isExpanded) {
-                    // Show menu
-                    mobileMenu.classList.remove('hidden');
-                    gsap.fromTo(mobileMenu,
-                        {
-                            opacity: 0,
-                            y: -20
-                        },
-                        {
-                            opacity: 1,
-                            y: 0,
-                            duration: 0.3,
-                            ease: "power2.out"
-                        }
-                    );
-                } else {
-                    // Hide menu
-                    gsap.to(mobileMenu, {
-                        opacity: 0,
-                        y: -20,
-                        duration: 0.3,
-                        ease: "power2.in",
-                        onComplete: () => mobileMenu.classList.add('hidden')
-                    });
-                }
-            });
-        }
-    </script>
+   
 
     <!-- FAQ Items Toggle -->
     <script>
@@ -1811,6 +1773,8 @@ document.addEventListener('DOMContentLoaded', function() {
     
     });
     </script>
+
+
 
     
 </body>

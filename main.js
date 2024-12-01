@@ -58,7 +58,7 @@ function loadModel() {
     
     try {
         gltfLoader.load(
-            './public/book_and_pencil_set/scene.gltf',
+            './public/scene.gltf',
             (gltf) => {
                 const model = gltf.scene;
                 
@@ -182,6 +182,63 @@ document.addEventListener('DOMContentLoaded', function() {
         behavior: 'instant'
     });
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    const menuButton = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuOpenIcon = document.querySelector('.menu-open');
+    const menuCloseIcon = document.querySelector('.menu-close');
+    let isMenuOpen = false;
+
+    function toggleMenu() {
+        isMenuOpen = !isMenuOpen;
+        
+        // Toggle menu visibility
+        mobileMenu.classList.toggle('hidden');
+        
+        // Toggle icons
+        menuOpenIcon.style.opacity = isMenuOpen ? '0' : '1';
+        menuCloseIcon.style.opacity = isMenuOpen ? '1' : '0';
+        
+        // Optional: Prevent body scrolling when menu is open
+        document.body.style.overflow = isMenuOpen ? 'hidden' : '';
+    }
+
+    // Toggle menu on button click
+    menuButton.addEventListener('click', toggleMenu);
+
+    // Close menu when clicking menu items
+    const menuItems = mobileMenu.querySelectorAll('a');
+    menuItems.forEach(item => {
+        item.addEventListener('click', () => {
+            if (isMenuOpen) toggleMenu();
+        });
+    });
+
+    // Close menu on outside click
+    document.addEventListener('click', (e) => {
+        if (isMenuOpen && 
+            !mobileMenu.contains(e.target) && 
+            !menuButton.contains(e.target)) {
+            toggleMenu();
+        }
+    });
+
+    // Close menu on escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && isMenuOpen) {
+            toggleMenu();
+        }
+    });
+
+    // Close menu on resize if screen becomes larger than mobile breakpoint
+    window.addEventListener('resize', () => {
+        if (window.innerWidth >= 768 && isMenuOpen) { // 768px is the md breakpoint
+            toggleMenu();
+        }
+    });
+});
+
 
 
 
