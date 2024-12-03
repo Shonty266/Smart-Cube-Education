@@ -8,11 +8,12 @@ const canvas = container.querySelector('canvas');
 const loader = document.getElementById('model-loader');
 
 const scene = new THREE.Scene();
-scene.background = new THREE.Color('#012833');
+scene.background = new THREE.Color('#010101');
+
 
 // Camera
 const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
-camera.position.set(0, 3, 0.5);
+camera.position.set(0, window.innerWidth < 768 ? 4 : 3, window.innerWidth < 768 ? 1.5 : 1);
 camera.lookAt(0, 0, 0);
 
 // Renderer
