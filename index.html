@@ -8,8 +8,15 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 </head>
 <body class="w-full bg-white">
+    <!-- Add this right after the body tag, before the go-up button -->
+    <div id="overlay" 
+         style="display: none; opacity: 0;"
+         class="fixed inset-0 bg-black transition-opacity duration-300 z-[9998]">
+    </div>
+
     <!-- Add this right after the opening body tag -->
     <button id="go-up-btn" 
             class="absolute bottom-8 right-8 bg-black text-white p-3 rounded-full shadow-xl hover:bg-gray-800 z-[9999] hidden"
@@ -25,6 +32,83 @@
                   d="M4.5 15.75l7.5-7.5 7.5 7.5" />
     </svg>
 </button>
+
+    <!-- Add this right after the opening body tag, after the go-up button -->
+    <div id="admission-form" 
+         class="fixed top-0 right-0 h-full w-[400px] bg-white shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out z-[9999]">
+        <!-- Header -->
+        <div class="flex justify-between items-center p-6 border-b">
+            <h2 class="text-xl font-bold text-gray-800">Admission Form</h2>
+            <button onclick="toggleAdmissionForm()" 
+                    class="text-gray-500 hover:text-gray-700 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" 
+                     fill="none" 
+                     viewBox="0 0 24 24" 
+                     stroke-width="2" 
+                     stroke="currentColor" 
+                     class="w-6 h-6">
+                    <path stroke-linecap="round" 
+                          stroke-linejoin="round" 
+                          d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
+    </div>
+
+    <!-- Form -->
+    <div class="p-6">
+        <form class="space-y-4" onsubmit="handleSubmit(event)">
+            <div>
+                <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                <input type="text" 
+                       id="name" 
+                       name="name" 
+                       class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500">
+            </div>
+
+            <div>
+                <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                <input type="email" 
+                       id="email" 
+                       name="email" 
+                       class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500">
+            </div>
+
+            <div>
+                <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+                <input type="tel" 
+                       id="phone" 
+                       name="phone" 
+                       class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500">
+            </div>
+
+            <div>
+                <label for="course" class="block text-sm font-medium text-gray-700 mb-1">Interested Course</label>
+                <select id="course" 
+                        name="course" 
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500">
+                    <option value="">Select a course</option>
+                    <option value="primary">Primary Education</option>
+                    <option value="secondary">Secondary Education</option>
+                    <option value="coding">Coding Classes</option>
+                    <option value="robotics">Robotics</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Message (Optional)</label>
+                <textarea id="message" 
+                          name="message" 
+                          rows="4" 
+                          class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"></textarea>
+            </div>
+
+            <button type="submit" 
+                    class="w-full bg-[#AD88C6] text-white py-2 px-4 rounded-md hover:bg-[#9B78B4] hover:scale-[1.02] transition-all duration-300 ease-out">
+                Submit Application
+            </button>
+        </form>
+    </div>
+</div>
 
    <div id="w-full main-container">
     <!-- Navbar -->
@@ -89,10 +173,10 @@
                     </div>
 
                     <!-- Admission Button -->
-                    <div class="group relative px-28 py-6 mx-auto my-0 bg-[#010101] rounded-lg overflow-hidden">
+                    <div class="group relative px-28 py-4 mx-auto my-0 bg-[#010101] rounded-lg overflow-hidden">
                         <div class="group absolute top-[8px] left-[-14px] h-[80%] w-[130%] bg-button-border animate-spin-slow"></div>
-                        <a href="">
-                            <div class="absolute top-[2%] left-[2%] w-[96%] h-[92%] bg-[#141414] rounded-lg flex items-center justify-center text-white font-medium text-lg group-hover:bg-[#1c1c1c] group cursor-pointer ">
+                        <button onclick="toggleAdmissionForm()" type="button">
+                            <div class="absolute top-[2%] left-[2%] w-[96%] h-[92%] bg-[#141414] rounded-lg flex items-center justify-center text-white font-medium text-lg group-hover:bg-[#1c1c1c] group cursor-pointer">
                                 <div class="flex items-center justify-center">
                                     <p class="text-white group-hover:text-white">Admission</p>
                                     <svg xmlns="http://www.w3.org/2000/svg" 
@@ -107,7 +191,7 @@
                                     </svg>
                                 </div>
                             </div>
-                        </a>
+                        </button>
                     </div>
                 </div>
 
@@ -177,7 +261,7 @@
                     <!-- Mobile Admission Button -->
                     <div class="group relative px-28 py-6 mx-auto my-2 bg-[#010101] rounded-lg overflow-hidden">
                         <div class="group absolute top-[8px] left-[-14px] h-[80%] w-[130%] bg-button-border animate-spin-slow"></div>
-                        <a href="#">
+                        <button onclick="toggleAdmissionForm()" type="button">
                             <div class="absolute top-[2%] left-[2%] w-[96%] h-[92%] bg-[#141414] rounded-lg flex items-center justify-center text-white font-medium text-lg group-hover:bg-[#1c1c1c] group cursor-pointer">
                                 <div class="flex items-center justify-center">
                                     <p class="text-white group-hover:text-white">Admission</p>
@@ -193,7 +277,7 @@
                                     </svg>
                                 </div>
                             </div>
-                        </a>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -246,6 +330,91 @@
                         closeMenu();
                     }
                 });
+
+                // Admission form functionality
+                function toggleAdmissionForm() {
+                    const form = document.getElementById('admission-form');
+                    const overlay = document.getElementById('overlay');
+                    
+                    if (form.classList.contains('translate-x-full')) {
+                        // Open form and show overlay
+                        form.classList.remove('translate-x-full');
+                        overlay.style.display = 'block';
+                        requestAnimationFrame(() => {
+                            overlay.style.opacity = '0.5';
+                        });
+                        document.body.style.overflow = 'hidden'; // Prevent scrolling
+                    } else {
+                        // Close form and hide overlay
+                        form.classList.add('translate-x-full');
+                        overlay.style.opacity = '0';
+                        setTimeout(() => {
+                            overlay.style.display = 'none';
+                        }, 300);
+                        document.body.style.overflow = ''; // Restore scrolling
+                    }
+                }
+
+                // Close form when clicking overlay
+                document.getElementById('overlay').addEventListener('click', toggleAdmissionForm);
+
+                // Initialize EmailJS
+                (function() {
+                    emailjs.init("JYT3sVLvpGafN7apZ"); // Add your EmailJS public key here
+                })();
+
+                // Handle form submission
+                async function handleSubmit(event) {
+                    event.preventDefault();
+                    
+                    const submitButton = event.target.querySelector('button[type="submit"]');
+                    const originalText = submitButton.innerHTML;
+                    
+                    try {
+                        // Disable button and show loading state
+                        submitButton.disabled = true;
+                        submitButton.innerHTML = `
+                            <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                            Sending...
+                        `;
+
+                        // Get form data
+                        const formData = {
+                            name: event.target.name.value,
+                            email: event.target.email.value,
+                            phone: event.target.phone.value,
+                            course: event.target.course.value,
+                            message: event.target.message.value
+                        };
+
+                        // Send email using EmailJS
+                        const response = await emailjs.send(
+                            "service_i0cq0mc", // Add your EmailJS service ID
+                            "template_v07dskp", // Add your EmailJS template ID
+                            formData
+                        );
+
+                        // Show success message
+                        alert("Thank you! Your application has been submitted successfully.");
+                        
+                        // Reset form
+                        event.target.reset();
+                        
+                        // Close admission form
+                        toggleAdmissionForm();
+
+                    } catch (error) {
+                        console.error("Error:", error);
+                        alert("Sorry, there was an error submitting your application. Please try again.");
+                    } finally {
+                        // Reset button state
+                        submitButton.disabled = false;
+                        submitButton.innerHTML = originalText;
+                    }
+                }
             </script>
         </div>
     </nav>
@@ -1684,8 +1853,7 @@
                     ease: "power4.out"
                 }
             );
-        });
-        
+        });    
         
        
     </script>
