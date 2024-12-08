@@ -10,6 +10,21 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 </head>
 <body class="w-full bg-white">
+    <!-- Add this right after the opening body tag -->
+    <button id="go-up-btn" 
+            class="absolute bottom-8 right-8 bg-black text-white p-3 rounded-full shadow-xl hover:bg-gray-800 z-[9999] hidden"
+            onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+        <svg xmlns="http://www.w3.org/2000/svg" 
+             fill="none" 
+             viewBox="0 0 24 24" 
+             stroke-width="2.5" 
+             stroke="currentColor" 
+             class="w-6 h-6">
+            <path stroke-linecap="round" 
+                  stroke-linejoin="round" 
+                  d="M4.5 15.75l7.5-7.5 7.5 7.5" />
+    </svg>
+</button>
 
    <div id="w-full main-container">
     <!-- Navbar -->
@@ -1126,7 +1141,7 @@
             <div class="mb-8 lg:w-[40%] w-full">
                 <h2 class="text-5xl font-bold mb-2 bg-gradient-to-r from-[#E1AFD1] via-[#AD88C6] to-[#7469B6] bg-clip-text text-transparent"> <span class="text-[#010101]">Frequently</span> Asked Questions</h2>
                 
-                <p class="text-gray-500">Have more questions? Contact our support team to get what you need. <a href="mailto:ronakmansuri9@gmail.com" target="_blank" class="text-blue-600 hover:underline">ronakmansuri9@gmail.com</a></p>
+                <p class="text-gray-500">Have more questions? Contact our support team to get what you need. <a href="mailto:mansurironak9@gmail.com" target="_blank" class="text-blue-600 hover:underline">mansurironak9@gmail.com</a></p>
             </div>
 
             <div class="lg:w-[60%] w-full space-y-6">
