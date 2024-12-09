@@ -9,9 +9,51 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <!-- Add this in the head section -->
+    <script src="https://wati-integration-prod-service.clare.ai/v2/watiWidget.js?30908" async></script>
 </head>
 <body class="w-full bg-white">
     <!-- Add this right after the body tag, before the go-up button -->
+<!-- Add this right after the opening <body> tag -->
+    <script>
+        var url = 'https://wati-integration-prod-service.clare.ai/v2/watiWidget.js?30908';
+        var s = document.createElement('script');
+        s.type = 'text/javascript';
+        s.async = true;
+        s.src = url;
+        var options = {
+            "enabled": true,
+            "chatButtonSetting": {
+                "backgroundColor": "#00e785",
+                "ctaText": "Chat with us",
+                "borderRadius": "25",
+                "marginLeft": "0",
+                "marginRight": "20",
+                "marginBottom": "20",
+                "ctaIconWATI": false,
+                "position": "right"
+            },
+            "brandSetting": {
+                "brandName": "Smart Cube Education",
+                "brandSubTitle": "undefined",
+                "brandImg": "https://www.wati.io/wp-content/uploads/2023/04/Wati-logo.svg",
+                "welcomeText": "Hi there!\nHow can I help you?",
+                "messageText": "{{page_link}}Hello, %0A I have a question about {{page_link}}",
+                "backgroundColor": "#00e785",
+                "ctaText": "Chat with us",
+                "borderRadius": "25",
+                "autoShow": false,
+                "phoneNumber": "917984024876"
+            }
+        };
+        s.onload = function() {
+            CreateWhatsappChatWidget(options);
+        };
+        var x = document.getElementsByTagName('script')[0];
+        x.parentNode.insertBefore(s, x);
+    </script>
+
+    
     <div id="overlay" 
          style="display: none; opacity: 0;"
          class="fixed inset-0 bg-black transition-opacity duration-300 z-[9998]">
